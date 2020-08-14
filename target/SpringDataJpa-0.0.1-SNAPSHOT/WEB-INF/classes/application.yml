@@ -1,0 +1,12 @@
+com:
+  anubhav:
+    springdatajpa:
+      database:
+        driverClassName: com.mysql.jdbc.Driver
+        jdbcUrl: 
+        username: root
+        password: root123
+      mvc:
+        views:
+          prefix: /WEB-INF/views/
+          suffix: .jsp

@@ -1,0 +1,4 @@
+from openjdk:8
+Expose 8080
+Add target/SpringDataJpa-0.0.1-SNAPSHOT.war app.war
+EntryPoint ["java","-jar","app.war"]

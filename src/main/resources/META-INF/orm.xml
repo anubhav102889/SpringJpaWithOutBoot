@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+	
+<named-native-query name="Department.getInfo" result-set-mapping="DeptEmplEmpTypeMapping">
+	<query><![CDATA[select dept.id as deptId,dept.name as deptName,emp.id as empId,emp.name as empName,
+	emp.mail as empMail, emp.gender as empGender, emp.doj as empDoj, empType.id as empTypeId,
+	empType.name as empTypeName,
+    case empType.name
+    when 'Contractor' then 'Y'
+    else 'N'
+    end as IsContractor
+    from department dept, employee emp, employeetype empType where dept.id=emp.deptId
+	and emp.empTypeId=empType.id and dept.id=:deptId
+    group by dept.id,dept.name,emp.id,emp.name,emp.mail,emp.gender,emp.doj,empType.id,empType.name,isContractor]]></query>
+</named-native-query>
+
+<sql-result-set-mapping name="DeptEmplEmpTypeMapping">
+	<constructor-result target-class="com.anubhav.springdatajpa.models.DeptEmplEmplTypeInfo">
+		<column name="deptId" class="java.lang.Integer"/>
+		<column name="deptName" class="java.lang.String"/>
+		<column name="empId" class="java.lang.Integer"/>
+		<column name="empName" class="java.lang.String"/>
+		<column name="empMail" class="java.lang.String"/>
+		<column name="empGender" class="java.lang.String"/>
+		<column name="empDoj" class="java.sql.Date"/>
+		<column name="empTypeId" class="java.lang.Integer"/>
+		<column name="empTypeName" class="java.lang.String"/>
+		<column name="IsContractor" class="java.lang.String"/>
+	</constructor-result>
+
+</sql-result-set-mapping>
+</entity-mappings>
